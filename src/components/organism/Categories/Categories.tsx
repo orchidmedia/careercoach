@@ -10,7 +10,6 @@ import {
 } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
 import CategoryCard from "./components/CategoryCard";
-import { useState } from "react";
 
 const categories = [
   {
