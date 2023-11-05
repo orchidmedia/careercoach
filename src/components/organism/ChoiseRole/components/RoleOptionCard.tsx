@@ -50,7 +50,7 @@ const RoleOptionCard = ({ role }: Props) => {
                 {role.text}
             </Typography>
             <Button variant="contained" size="large">
-                <Link href={{
+                <Link style={{ textDecoration: 'none', color: '#FFF' }} href={{
                     pathname: '/candidate/uploadResumen',
                 }}>
                     {role.textButton}
