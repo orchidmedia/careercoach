@@ -1,9 +1,11 @@
 import { gradient } from "@/config/theme";
 import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode, useState } from "react";
 
 type Props = {
-    role: { icon: ReactNode; title: string; text: string; textButton: string };
+    role: { icon: ReactNode; title: string; text: string; textButton: string, route: any };
 };
 
 const initialStyle = {
@@ -20,8 +22,9 @@ const hoverStyle = {
 };
 
 const RoleOptionCard = ({ role }: Props) => {
+    const router = useRouter();
     const [styles, setStyles] = useState(hoverStyle);
-
+    const route = role.route
     return (
         <Box
             sx={{
@@ -47,7 +50,11 @@ const RoleOptionCard = ({ role }: Props) => {
                 {role.text}
             </Typography>
             <Button variant="contained" size="large">
-                {role.textButton}
+                <Link href={{
+                    pathname: '/candidate/uploadResumen',
+                }}>
+                    {role.textButton}
+                </Link>
             </Button>
         </Box>
     );

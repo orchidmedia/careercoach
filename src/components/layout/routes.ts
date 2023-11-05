@@ -4,11 +4,11 @@ export const routes = [
     path: "/",
   },
   {
-    name: "Candidate",
-    path: "/candidate",
-  },
-  {
     name: "Employee",
     path: "/employee",
+  },
+  {
+    name: "Candidate",
+    path: "/candidate/uploadResumen",
   },
 ];
