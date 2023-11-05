@@ -1,5 +1,6 @@
 import { gradient } from "@/config/theme";
 import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
 
 type Props = {
   query: boolean;
@@ -44,7 +45,12 @@ const HeroText = ({ query }: Props) => {
         </Box>
         <Box sx={{ mt: 7, textAlign: query ? "center" : "start" }}>
           <Button variant="contained" size="large">
-            Start Searching
+            <Link style={{ textDecoration: 'none', color: '#FFF' }}
+              href={{
+                pathname: '/candidate/uploadResumen',
+              }}>
+              Start Searching
+            </Link>
           </Button>
           <Button size="large">How It Works</Button>
         </Box>
