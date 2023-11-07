@@ -17,7 +17,7 @@ const ProgressBar = ({counter = 0}:any) => {
                 break;
 
             case '/candidate/recommendations/idealPaths':
-                text = "We have analyzed your data. Here are some insights from Career Coach before you apply to jor dream job."
+                text = "Here are some insights based on our AI analysis of your resume."
                 break;
 
             case '/candidate/recommendations/moreInsights':
@@ -89,7 +89,7 @@ const ProgressBar = ({counter = 0}:any) => {
 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
                     <Box sx={{ borderRadius: 20, backgroundColor: counter >= 3 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
-                    <Typography>Job Offers</Typography>
+                    <Typography>Job Opportunites</Typography>
                     {
                         pathname === '/candidate/recommendations/jobs' && <Typography sx={{
                             width: '300px',
@@ -100,7 +100,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Here are the top 4 best matches for your dream job an your qualifications.</Typography>
+                        }}>Here are the top 4 matches for the career path you selected.</Typography>
                     }
                 </Box>
             </Box>

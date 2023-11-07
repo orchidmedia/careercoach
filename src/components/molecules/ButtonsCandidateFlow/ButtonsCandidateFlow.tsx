@@ -1,5 +1,5 @@
 import Loader from '@/components/atoms/Loader';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
@@ -31,10 +31,11 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         body: formData
                     }).then((response) => response.json())
                     .catch((error) => console.error("Error:", error))
-                    .then((response) => { 
-                        setloading(false); 
-                        console.log("Success:", response); 
-                        router.push('/candidate/dreamJob') });
+                    .then((response) => {
+                        setloading(false);
+                        console.log("Success:", response);
+                        router.push('/candidate/dreamJob')
+                    });
                 break;
             case '/candidate/dreamJob':
                 var raw = JSON.stringify({
@@ -74,6 +75,43 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
         router.back()
     }
 
+    const handleButtonDisabled = () => {
+        if (documentPDF && pathname === '/candidate/uploadResumen') {
+            return false
+        }
+        if (inputValue?.length >= 50 && pathname === '/candidate/dreamJob') {
+            return false
+        }
+        return true
+    }
+
+    const handleReturnTooltip = () => {
+        if(pathname == '/candidate/recommendations') {
+            return
+        }
+        if (pathname == '/candidate/dreamJob' && handleButtonDisabled()) {
+            return (
+                <Tooltip title="Please give Career Coach more input">
+                    <span>
+                        <Button disabled={handleButtonDisabled()} onClick={() => handleContinue()} variant="contained" size="large">
+                            <Typography sx={{ color: '#FFF' }}>
+                                Continue
+                            </Typography>
+                        </Button>
+                    </span>
+                </Tooltip>
+            )
+        } else {
+            return (
+                <Button disabled={handleButtonDisabled()} onClick={() => handleContinue()} variant="contained" size="large">
+                    <Typography sx={{ color: '#FFF' }}>
+                        Continue
+                    </Typography>
+                </Button>
+            )
+        }
+    }
+
     return (
         <Box >
             <Box display={'flex'} justifyContent={'flex-end'} gap={'20px'} mx={'90px'}>
@@ -82,13 +120,18 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         Back
                     </Typography>
                 </Button>
-                {pathname !== '/candidate/recommendations' &&
-                    <Button onClick={() => handleContinue()} variant="contained" size="large">
-                        <Typography sx={{ color: '#FFF' }}>
-                            Continue
-                        </Typography>
-                    </Button>
-                }
+                {/*  {pathname !== '/candidate/recommendations' &&
+                    <Tooltip title="Please give Career Coach more input">
+                        <span>
+                            <Button disabled={handleButtonDisabled()} onClick={() => handleContinue()} variant="contained" size="large">
+                                <Typography sx={{ color: '#FFF' }}>
+                                    Continue
+                                </Typography>
+                            </Button>
+                        </span>
+                    </Tooltip>
+                } */}
+                {handleReturnTooltip()}
             </Box>
             <Loader open={loading} />
         </Box>
