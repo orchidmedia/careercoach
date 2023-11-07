@@ -65,7 +65,7 @@ export const JobsBoard = () => {
             }}>
                 <ListOptions
                     type={'job'}
-                    title={'Job Offers'}
+                    title={'Job Opportunites'}
                     options={careers}
                     selected={selected}
                     setSelected={setSelected}

@@ -13,7 +13,7 @@ const roles = [
     },
     {
         icon: <Campaign sx={{ fontSize: 52 }} />,
-        title: 'I am an Employeer',
+        title: 'I am an Employer',
         text: 'Use Artificial Intelligence to match your job openings with the most qualified and suitable candidates. Post jobs, manage applications, and hire the best talent for your company',
         textButton: 'FIND SEEKERS',
         route: '/employee'

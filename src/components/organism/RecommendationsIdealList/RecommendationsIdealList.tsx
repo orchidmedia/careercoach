@@ -72,7 +72,7 @@ const RecommendationsIdealList = (data: any) => {
                 />
                 <OptionDescription selected={selected} />
             </Box>
-            <ButtonsRecommendations textContinue={'GET MORE INSIGHTS'} />
+            <ButtonsRecommendations textContinue={'View Job Opportunities'} />
             <Loader open={loading} />
         </Box>
     )
