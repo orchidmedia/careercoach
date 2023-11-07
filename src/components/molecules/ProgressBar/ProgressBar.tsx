@@ -1,15 +1,53 @@
+import { gradient } from '@/config/theme';
 import { Box, Typography } from '@mui/material'
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const ProgressBar = () => {
+const ProgressBar = ({counter = 0}:any) => {
     const { pathname } = useRouter();
+
+    //const [counter, setCouner] = useState(0)
+
+    const constHandleTextRecommendation = () => {
+        let text
+
+        switch (pathname) {
+            case '/candidate/recommendations':
+                text = "Here you'll find different career options based on the data we analyzed from your resume, job description and recommendations."
+                break;
+
+            case '/candidate/recommendations/idealPaths':
+                text = "We have analyzed your data. Here are some recommendations from Career Coach before you apply to jor dream job."
+                break;
+
+            case '/candidate/recommendations/moreInsights':
+                text = "We have analyzed your data. Here are some recommendations from Career Coach before you apply to jor dream job."
+                break;
+
+            default:
+                break;
+        }
+
+        return (
+            <Typography sx={{
+                width: '300px',
+                fontWeight: 300,
+                color: '#013440',
+                mt: 3,
+                fontStyle: 'italic',
+                fontSize: { xs: 10, sm: 12 },
+                lineHeight: '140%',
+                textAlign: 'center'
+            }}>{text}</Typography>
+        )
+    }
+
     return (
         <Box>
             <Box display={'flex'} sx={{ justifyContent: 'space-around', }}>
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
-                    <Typography>Upload Resumen</Typography>
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 0 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Typography>Upload Resume</Typography>
                     {
                         pathname === '/candidate/uploadResumen' && <Typography sx={{
                             width: '300px',
@@ -25,7 +63,7 @@ const ProgressBar = () => {
                 </Box>
 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 1 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
                     <Typography>Dream Job Description</Typography>
                     {
                         pathname === '/candidate/dreamJob' && <Typography sx={{
@@ -42,10 +80,18 @@ const ProgressBar = () => {
                 </Box>
 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
-                    <Typography>Recommendations</Typography>
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 2 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Typography>Career Path Insights</Typography>
                     {
-                        pathname === '/candidate/recommendations' && <Typography sx={{
+                        constHandleTextRecommendation()
+                    }
+                </Box>
+
+                <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 3 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Typography>Job Offers</Typography>
+                    {
+                        pathname === '/candidate/recommendations/jobs' && <Typography sx={{
                             width: '300px',
                             fontWeight: 300,
                             color: '#013440',
@@ -54,13 +100,8 @@ const ProgressBar = () => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Here you'll find different career options based on the data we analyzed from your resume, job description and recommendations.</Typography>
+                        }}>Here are the top 10 best matches for your dream job an your qualifications.</Typography>
                     }
-                </Box>
-
-                <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
-                    <Typography>Career Path</Typography>
                 </Box>
             </Box>
 

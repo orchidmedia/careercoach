@@ -19,7 +19,6 @@ const RecommendationsPath = ({ careers }: any) => {
         handleSetDate();
     }, [careers])
 
-    console.log("data", data)
     return (
         <Box mt={2} mb={4}>
             <Box

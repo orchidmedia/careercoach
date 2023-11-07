@@ -10,7 +10,7 @@ const Recommendations = (props: any) => {
         if (careersData) {
             setCareers(careersData)
         } else {
-            const localData = localStorage.getItem('careers')
+            const localData = localStorage.getItem('recommendations')
             setCareers(JSON.parse(localData as any))
         }
     }
@@ -20,7 +20,7 @@ const Recommendations = (props: any) => {
     }, [props?.router?.query]);
     return (
         <div>
-            <ProgressBar />
+            <ProgressBar counter={2} />
             <RecommendationsPath careers={careers} />
         </div>
     )

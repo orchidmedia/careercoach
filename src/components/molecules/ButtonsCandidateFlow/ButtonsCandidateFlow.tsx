@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
 
-const ButtonsCandidateFlow = ({ documentPDF, inputValue }: any) => {
+const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
     const { pathname, isReady } = useRouter();
     const router = useRouter();
-    const [previous, setPrevious] = useState('');
+    //const [previous, setPrevious] = useState('');
 
     const handleContinue = async () => {
         let formData = new FormData();
@@ -16,8 +16,9 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue }: any) => {
             const PDF = documentPDF
             formData.append("file", PDF);
         }
-        const valueToJSON = { 'recommend': inputValue }
-        const value = JSON.stringify(valueToJSON)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
         switch (pathname) {
             case '/candidate/uploadResumen':
@@ -31,9 +32,6 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue }: any) => {
                     .then((response) => { console.log("Success:", response); router.push('/candidate/dreamJob') });
                 break;
             case '/candidate/dreamJob':
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-
                 var raw = JSON.stringify({
                     "recommend": inputValue
                 });
@@ -46,7 +44,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue }: any) => {
                 })
                     .then(response => response.text())
                     .then(result => {
-                        localStorage.setItem('careers', JSON.stringify(result, null, 2))
+                        localStorage.setItem('recommendations', JSON.stringify(result, null, 2))
                         console.log('result', result);
                         if (isReady) {
                             router.push({
@@ -63,27 +61,28 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue }: any) => {
         }
     }
 
-    /* useEffect(() => {
-        setPrevious(pathname)
-    }, []) */
+    const handleBack = () => {
+        if (pathname === '/candidate/uploadResumen') {
+            router.push('/')
+        }
+        router.back()
+    }
 
     return (
         <Box >
             <Box display={'flex'} justifyContent={'flex-end'} gap={'20px'} mx={'90px'}>
-                <Button size="large">
-                    <Link
-                        style={{ textDecoration: 'none', color: '#979797' }}
-                        href={{
-                            pathname: pathname === '/candidate/uploadResumen' ? '/' : `/${previous}`,
-                        }}>
-                        Return
-                    </Link>
-                </Button>
-                <Button onClick={() => handleContinue()} variant="contained" size="large">
-                    <Typography sx={{ color: '#FFF' }}>
-                        Continue
+                <Button onClick={() => handleBack()} variant="outlined" size="large">
+                    <Typography sx={{ color: '#025E73' }}>
+                        Back
                     </Typography>
                 </Button>
+                {pathname !== '/candidate/recommendations' &&
+                    <Button onClick={() => handleContinue()} variant="contained" size="large">
+                        <Typography sx={{ color: '#FFF' }}>
+                            Continue
+                        </Typography>
+                    </Button>
+                }
             </Box>
         </Box>
     )
