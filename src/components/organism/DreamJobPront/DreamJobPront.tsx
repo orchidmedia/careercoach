@@ -1,13 +1,13 @@
 import ButtonsCandidateFlow from '@/components/molecules/ButtonsCandidateFlow';
 import { makeStyles } from '@material-ui/styles';
 import { Box, TextField, Typography } from '@mui/material/'
-import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 
 const useStyles = makeStyles({
     underline: {
         "& .css-1a8gm5f-MuiInputBase-root-MuiInput-root:before": {
-            borderBottom: "none"
+            borderBottom: "none",
+            display: 'none'
         },
 
     }
