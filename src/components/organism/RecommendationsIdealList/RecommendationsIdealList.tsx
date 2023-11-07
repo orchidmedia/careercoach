@@ -4,6 +4,7 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ListOptions from '../../molecules/ListOptions/ListOptions'
+import Loader from '@/components/atoms/Loader'
 
 const RecommendationsIdealList = (data: any) => {
     const { isReady } = useRouter();
@@ -12,6 +13,8 @@ const RecommendationsIdealList = (data: any) => {
     const [promptCareers, setPromptCareers]: any = useState();
     const [careers, setCareers]: any = useState();
     const [selected, setSelected]: any = useState();
+    const [loading, setloading] = useState(false);
+
 
     const handleSaveCareers = () => {
         const localData = localStorage.getItem('promptCareers')
@@ -20,6 +23,7 @@ const RecommendationsIdealList = (data: any) => {
 
 
     const hadleGetIdealPaths = async () => {
+        setloading(true)
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify({
@@ -33,6 +37,7 @@ const RecommendationsIdealList = (data: any) => {
         })
             .then(response => response.text())
             .then(result => {
+                setloading(false)
                 const data = JSON.parse(result)
                 setCareers(data)
                 setSelected(data[0])
@@ -68,6 +73,7 @@ const RecommendationsIdealList = (data: any) => {
                 <OptionDescription selected={selected} />
             </Box>
             <ButtonsRecommendations textContinue={'GET MORE INSIGHTS'} />
+            <Loader open={loading} />
         </Box>
     )
 }

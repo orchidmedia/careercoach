@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import ButtonsRecommendations from '@/components/molecules/ButtonsRecommendations';
+import Loader from '@/components/atoms/Loader';
 
 export const JobsBoard = () => {
     const router = useRouter();
@@ -11,6 +12,8 @@ export const JobsBoard = () => {
     const [promptCareers, setPromptCareers]: any = useState();
     const [careers, setCareers]: any = useState();
     const [selected, setSelected]: any = useState();
+    const [loading, setloading] = useState(false);
+
 
     const handleSaveCareers = () => {
         const localData = localStorage.getItem('promptCareers')
@@ -19,6 +22,7 @@ export const JobsBoard = () => {
 
 
     const hadleGetIdealPaths = async () => {
+        setloading(true);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify({
@@ -32,10 +36,11 @@ export const JobsBoard = () => {
         })
             .then(response => response.text())
             .then(result => {
+                setloading(false);
                 const data = JSON.parse(result)
                 setCareers(data)
                 setSelected(data?.jobs_results[0])
-            }).catch(error => console.log('error', error));
+            }).catch(error => {setloading(false); console.log('error', error)});
     }
 
     useEffect(() => {
@@ -68,6 +73,7 @@ export const JobsBoard = () => {
                 <OptionDescription type={'job'} selected={selected} />
             </Box>
             <ButtonsRecommendations routerLink={careers?.search_metadata?.google_jobs_url} textContinue={'APPLY JOB'} />
+            <Loader open={loading} />
         </Box>
     )
 }

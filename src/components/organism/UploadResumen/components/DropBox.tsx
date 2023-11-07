@@ -29,8 +29,8 @@ const DropBox = ({setDocumentPDF}:any) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Typography>Drag Here Your Resume</Typography>
-                <Typography>or</Typography>
+                {/* <Typography>Drag Here Your Resume</Typography>
+                <Typography>or</Typography> */}
                 <input
                     accept={".pdf"}
                     style={{ display: "none" }}
@@ -57,7 +57,7 @@ const DropBox = ({setDocumentPDF}:any) => {
                     fontSize: '15px',
                     fontWeight: 700,
                     marginTop: '25px'
-                }}>Resume:</Typography>
+                }}>File name:</Typography>
                 <Box sx={{
                     my: '10px',
                     width: '270px',
@@ -70,16 +70,10 @@ const DropBox = ({setDocumentPDF}:any) => {
                     alignItems: 'center',
                 }}>
                     <Typography sx={{ fontSize: '12px' }}>{document?.name}</Typography>
-                    <Box>
+                    {/* <Box>
                         <Typography sx={{ fontSize: '12px' }}>{document?.size}</Typography>
-                    </Box>
+                    </Box> */}
                 </Box>
-                <Typography sx={{
-                    color: '#333',
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    marginTop: '25px'
-                }}>Job Description:</Typography>
             </Box>
         </Box>
     )

@@ -31,7 +31,7 @@ const RecommendationsCard = ({ career }: any) => {
                 }}
                 sx={{ marginBottom: '15px' }}
                 variant="contained"
-                size="medium">Search Jobs</Button>
+                size="medium">Get Insights</Button>
         </Box>
     )
 }
