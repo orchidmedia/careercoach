@@ -1,3 +1,4 @@
+import Loader from '@/components/atoms/Loader';
 import { Box, Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,9 +8,10 @@ import React, { useState, useEffect } from 'react';
 const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
     const { pathname, isReady } = useRouter();
     const router = useRouter();
-    //const [previous, setPrevious] = useState('');
+    const [loading, setloading] = useState(false);
 
     const handleContinue = async () => {
+        setloading(true)
         let formData = new FormData();
 
         if (documentPDF !== null || documentPDF !== null) {
@@ -29,7 +31,10 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         body: formData
                     }).then((response) => response.json())
                     .catch((error) => console.error("Error:", error))
-                    .then((response) => { console.log("Success:", response); router.push('/candidate/dreamJob') });
+                    .then((response) => { 
+                        setloading(false); 
+                        console.log("Success:", response); 
+                        router.push('/candidate/dreamJob') });
                 break;
             case '/candidate/dreamJob':
                 var raw = JSON.stringify({
@@ -44,6 +49,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                 })
                     .then(response => response.text())
                     .then(result => {
+                        setloading(false);
                         localStorage.setItem('recommendations', JSON.stringify(result, null, 2))
                         console.log('result', result);
                         if (isReady) {
@@ -84,6 +90,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                     </Button>
                 }
             </Box>
+            <Loader open={loading} />
         </Box>
     )
 }
