@@ -75,7 +75,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Our app will ise this information to train the prompt in order to look for the best jobs possible based on your input.</Typography>
+                        }}>Our app will use this information to train the prompt in order to look for the best jobs possible based on your input.</Typography>
                     }
                 </Box>
 
