@@ -5,7 +5,7 @@ import React from 'react'
 const DreamJob = () => {
     return (
         <div>
-            <ProgressBar counter={1}/>
+            <ProgressBar counter={2}/>
             <DreamJobPront />
         </div>
     )

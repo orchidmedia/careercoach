@@ -20,7 +20,7 @@ const Recommendations = (props: any) => {
     }, [props?.router?.query]);
     return (
         <div>
-            <ProgressBar counter={2} />
+            <ProgressBar counter={3} />
             <RecommendationsPath careers={careers} />
         </div>
     )
