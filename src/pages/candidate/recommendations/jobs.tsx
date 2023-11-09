@@ -5,7 +5,7 @@ import React from 'react'
 export const Jobs = () => {
   return (
     <div>
-        <ProgressBar counter={3} />
+        <ProgressBar counter={4} />
         <JobsBoard/>
     </div>
   ) 

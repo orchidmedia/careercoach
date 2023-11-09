@@ -5,7 +5,7 @@ import React from 'react'
 const IdealPaths = (props:any) => {
   return (
     <div>
-      <ProgressBar counter={2}/>
+      <ProgressBar counter={3}/>
       <RecommendationsIdealList data={props?.router?.query}/>
     </div>
   )
