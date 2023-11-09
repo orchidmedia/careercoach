@@ -63,7 +63,7 @@ const ProgressBar = ({counter = 0}:any) => {
                 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
                     <Box sx={{ borderRadius: 20, backgroundColor: counter >= 1 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
-                    <Typography>Recommendations to improve resume</Typography>
+                    <Typography>Resume Recommendations</Typography>
                     {
                         pathname === '/candidate/improveResume' && <Typography sx={{
                             width: '300px',
