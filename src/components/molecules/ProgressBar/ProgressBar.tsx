@@ -16,7 +16,7 @@ const ProgressBar = ({counter = 0}:any) => {
                 break;
 
             case '/candidate/recommendations/idealPaths':
-                text = "Here are some insights based on our AI analysis of your resume."
+                text = "Here are some insights based the information given, and the career path selected."
                 break;
 
             case '/candidate/recommendations/moreInsights':
@@ -74,7 +74,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>We have analyzed your data. Here are some recommendations from Career Coach before you apply to jor dream job</Typography>
+                        }}>We have analyzed your resume. Here are some recommendations from Career Coach to improve it based on the current input.</Typography>
                     }
                 </Box>
 
@@ -91,7 +91,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Our app will use this information to train the prompt in order to look for the best jobs possible based on your input.</Typography>
+                        }}>Career Coach will use this prompt and merge it with your resume information to generate the ideal career path insights for the job search.</Typography>
                     }
                 </Box>
 
@@ -116,7 +116,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Here are the top 4 matches for the career path you selected.</Typography>
+                        }}>Here are the 4 matches based on the career path you selected. You'll be prompted to Google Jobs in case you want to apply.</Typography>
                     }
                 </Box>
             </Box>
