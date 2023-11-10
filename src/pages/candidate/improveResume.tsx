@@ -2,12 +2,12 @@ import ProgressBar from '@/components/molecules/ProgressBar'
 import MoreInsightsUpdate from '@/components/organism/MoreInsightsUpdate/MoreInsightsUpdate'
 import React from 'react'
 
-export const MoreInsights = () => {
+export const ImproveResume = () => {
   return (
     <div>
-        <ProgressBar counter={2} />
+        <ProgressBar counter={1} />
         <MoreInsightsUpdate />
     </div>
   )
 }
-export default MoreInsights
+export default ImproveResume

@@ -26,16 +26,24 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
             case '/candidate/uploadResumen':
                 await fetch('https://careercoach-b957c7cfa4b2.herokuapp.com/upload/csv',
                     {
-                        mode: 'no-cors',
+                        redirect: 'follow',
                         method: 'POST',
                         body: formData
-                    }).then((response) => response.json())
-                    .catch((error) => console.error("Error:", error))
-                    .then((response) => {
+                    }).then((response) => {
+                        if (response) {
+                            return response.json();
+                        } else {
+                            throw new Error('Server response wasn\'t OK');
+                        }
+                    }).then((res) => {
                         setloading(false);
-                        console.log("Success:", response);
-                        router.push('/candidate/dreamJob')
-                    });
+                        localStorage.setItem('improves', JSON.stringify(res, null, 2))
+                        console.log("Success:", res);
+                        router.push('/candidate/improveResume')
+                    }).catch((error) => console.error("Error 2:", error));
+                break;
+            case '/candidate/improveResume':
+                router.push('/candidate/dreamJob')
                 break;
             case '/candidate/dreamJob':
                 var raw = JSON.stringify({
@@ -79,6 +87,9 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
         if (documentPDF && pathname === '/candidate/uploadResumen') {
             return false
         }
+        if(pathname === '/candidate/improveResume'){
+            return false
+        }
         if (inputValue?.length >= 50 && pathname === '/candidate/dreamJob') {
             return false
         }
@@ -86,7 +97,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
     }
 
     const handleReturnTooltip = () => {
-        if(pathname == '/candidate/recommendations') {
+        if (pathname == '/candidate/recommendations') {
             return
         }
         if (pathname == '/candidate/dreamJob' && handleButtonDisabled()) {

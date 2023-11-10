@@ -1,7 +1,6 @@
-import { gradient } from '@/config/theme';
 import { Box, Typography } from '@mui/material'
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const ProgressBar = ({counter = 0}:any) => {
     const { pathname } = useRouter();
@@ -17,7 +16,7 @@ const ProgressBar = ({counter = 0}:any) => {
                 break;
 
             case '/candidate/recommendations/idealPaths':
-                text = "Here are some insights based on our AI analysis of your resume."
+                text = "Here are some insights based the information given, and the career path selected."
                 break;
 
             case '/candidate/recommendations/moreInsights':
@@ -61,9 +60,26 @@ const ProgressBar = ({counter = 0}:any) => {
                         }}>Our app will scan your resume and extract the most relevant information about your skills, education, and experience.</Typography>
                     }
                 </Box>
-
+                
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
                     <Box sx={{ borderRadius: 20, backgroundColor: counter >= 1 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Typography>Resume Recommendations</Typography>
+                    {
+                        pathname === '/candidate/improveResume' && <Typography sx={{
+                            width: '300px',
+                            fontWeight: 300,
+                            color: '#013440',
+                            mt: 3,
+                            fontStyle: 'italic',
+                            fontSize: { xs: 10, sm: 12 },
+                            lineHeight: '140%',
+                            textAlign: 'center'
+                        }}>We have analyzed your resume. Here are some recommendations from Career Coach to improve it based on the current input.</Typography>
+                    }
+                </Box>
+
+                <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 2 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
                     <Typography>Dream Job Description</Typography>
                     {
                         pathname === '/candidate/dreamJob' && <Typography sx={{
@@ -75,12 +91,12 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Our app will use this information to train the prompt in order to look for the best jobs possible based on your input.</Typography>
+                        }}>Career Coach will use this prompt and merge it with your resume information to generate the ideal career path insights for the job search.</Typography>
                     }
                 </Box>
 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 2 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 3 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
                     <Typography>Career Path Insights</Typography>
                     {
                         constHandleTextRecommendation()
@@ -88,7 +104,7 @@ const ProgressBar = ({counter = 0}:any) => {
                 </Box>
 
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 3 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
+                    <Box sx={{ borderRadius: 20, backgroundColor: counter >= 4 ? '#025E73' : '#979797', height: '48px', width: '48px', marginBottom: 1 }} />
                     <Typography>Job Opportunites</Typography>
                     {
                         pathname === '/candidate/recommendations/jobs' && <Typography sx={{
@@ -100,7 +116,7 @@ const ProgressBar = ({counter = 0}:any) => {
                             fontSize: { xs: 10, sm: 12 },
                             lineHeight: '140%',
                             textAlign: 'center'
-                        }}>Here are the top 4 matches for the career path you selected.</Typography>
+                        }}>Here are the 4 matches based on the career path you selected. You'll be prompted to Google Jobs in case you want to apply.</Typography>
                     }
                 </Box>
             </Box>
