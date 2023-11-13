@@ -19,7 +19,11 @@ export const JobsBoard = () => {
 
     const handleSaveCareers = () => {
         const localData = localStorage.getItem('promptCareers')
-        setPromptCareers(localData)
+        if(localData){
+            setPromptCareers(localData)
+        } else {
+            setOpen(true)
+        }
     }
 
 
