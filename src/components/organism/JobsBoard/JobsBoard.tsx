@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import ButtonsRecommendations from '@/components/molecules/ButtonsRecommendations';
 import Loader from '@/components/atoms/Loader';
+import AlertError from '@/components/molecules/AlertError';
 
 export const JobsBoard = () => {
     const router = useRouter();
@@ -13,6 +14,7 @@ export const JobsBoard = () => {
     const [careers, setCareers]: any = useState();
     const [selected, setSelected]: any = useState();
     const [loading, setloading] = useState(false);
+    const [open, setOpen] = useState(false);
 
 
     const handleSaveCareers = () => {
@@ -40,7 +42,11 @@ export const JobsBoard = () => {
                 const data = JSON.parse(result)
                 setCareers(data)
                 setSelected(data?.jobs_results[0])
-            }).catch(error => {setloading(false); console.log('error', error)});
+            }).catch(error => {
+                setloading(false);
+                setOpen(true);
+                console.log('error', error)
+            });
     }
 
     useEffect(() => {
@@ -74,6 +80,7 @@ export const JobsBoard = () => {
             </Box>
             <ButtonsRecommendations routerLink={careers?.search_metadata?.google_jobs_url} textContinue={'APPLY JOB'} />
             <Loader open={loading} />
+            <AlertError open={open} setOpen={setOpen} />
         </Box>
     )
 }

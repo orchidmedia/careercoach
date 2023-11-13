@@ -2,7 +2,7 @@ import { gradient } from '@/config/theme'
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-const ListOptions = ({ type = '', title, options, selected, setSelected }: any) => {
+const ListOptions = ({ type = '', title, options=[], selected, setSelected }: any) => {
     
     return (
         <Box paddingLeft={2} width={'758px'}>
