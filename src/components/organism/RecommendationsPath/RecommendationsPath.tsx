@@ -13,7 +13,7 @@ const RecommendationsPath = ({ careers }: any) => {
 
 
     const handleSetDate = () => {
-        if(careers){
+        if (careers && careers !== '[]') {
             setOpen(false)
             setData(JSON.parse(careers))
         } else {
@@ -34,7 +34,7 @@ const RecommendationsPath = ({ careers }: any) => {
                     justifyContent: 'center'
                 }}>
                 {
-                    careers?.length > 0 && data?.map((career: any, index: number) => {
+                    data?.map((career: any, index: number) => {
                         return (
                             <RecommendationsCard key={index} career={career} />
                         )

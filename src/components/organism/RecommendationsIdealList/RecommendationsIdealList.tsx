@@ -21,7 +21,7 @@ const RecommendationsIdealList = (data: any) => {
 
     const handleSaveCareers = () => {
         const localData = localStorage.getItem('promptCareers')
-        if(localData){
+        if (localData) {
             setPromptCareers(localData)
         } else {
             setOpen(true)
