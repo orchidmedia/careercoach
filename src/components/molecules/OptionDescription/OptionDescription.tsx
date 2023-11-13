@@ -60,7 +60,7 @@ const OptionDescription = ({ selected, type = '' }: any) => {
                     }}>Tailor in Summary Section to Highlight Relevant Experience and Skills</Typography>
                 </Box> */}
                 {
-                    selected?.description?.description?.map((item: any, index: number) => {
+                    selected?.description?.map((item: any, index: number) => {
                         return (
                             <Typography ml={2} my={3} key={index}>{item}</Typography>
                         )
