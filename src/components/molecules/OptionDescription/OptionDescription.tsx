@@ -19,7 +19,7 @@ const OptionDescription = ({ selected, type = '' }: any) => {
                     fontSize: '18px',
                     color: '#333',
                     marginBottom: '10px',
-                    marginTop:'20px'
+                    marginTop: '20px'
                 }}>{selected?.title}</Typography>
                 <Typography sx={{
                     marginBottom: '10px'
@@ -60,7 +60,7 @@ const OptionDescription = ({ selected, type = '' }: any) => {
                     }}>Tailor in Summary Section to Highlight Relevant Experience and Skills</Typography>
                 </Box> */}
                 {
-                    selected?.description?.map((item: any, index: number) => {
+                    selected?.description?.description?.map((item: any, index: number) => {
                         return (
                             <Typography ml={2} my={3} key={index}>{item}</Typography>
                         )
