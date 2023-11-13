@@ -3,12 +3,14 @@ import { Box, Button, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import AlertError from '../AlertError';
 
 
 const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
     const { pathname, isReady } = useRouter();
     const router = useRouter();
     const [loading, setloading] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleContinue = async () => {
         setloading(true)
@@ -33,6 +35,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         if (response) {
                             return response.json();
                         } else {
+                            setOpen(true);
                             throw new Error('Server response wasn\'t OK');
                         }
                     }).then((res) => {
@@ -40,7 +43,10 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         localStorage.setItem('improves', JSON.stringify(res, null, 2))
                         console.log("Success:", res);
                         router.push('/candidate/improveResume')
-                    }).catch((error) => console.error("Error 2:", error));
+                    }).catch((error) => {
+                        setOpen(true);
+                        console.error("Error 2:", error)
+                    });
                 break;
             case '/candidate/improveResume':
                 router.push('/candidate/dreamJob')
@@ -67,7 +73,10 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                                 query: { careers: JSON.stringify(result) }
                             }, '/candidate/recommendations')
                         }
-                    }).catch(error => console.log('error', error));
+                    }).catch(error => {
+                        setOpen(true);
+                        console.error("Error:", error)
+                    });
 
                 break;
 
@@ -87,7 +96,7 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
         if (documentPDF && pathname === '/candidate/uploadResumen') {
             return false
         }
-        if(pathname === '/candidate/improveResume'){
+        if (pathname === '/candidate/improveResume') {
             return false
         }
         if (inputValue?.length >= 50 && pathname === '/candidate/dreamJob') {
@@ -131,20 +140,10 @@ const ButtonsCandidateFlow = ({ documentPDF, inputValue, }: any) => {
                         Back
                     </Typography>
                 </Button>
-                {/*  {pathname !== '/candidate/recommendations' &&
-                    <Tooltip title="Please give Career Coach more input">
-                        <span>
-                            <Button disabled={handleButtonDisabled()} onClick={() => handleContinue()} variant="contained" size="large">
-                                <Typography sx={{ color: '#FFF' }}>
-                                    Continue
-                                </Typography>
-                            </Button>
-                        </span>
-                    </Tooltip>
-                } */}
                 {handleReturnTooltip()}
             </Box>
             <Loader open={loading} />
+            <AlertError open={open} setOpen={setOpen} />
         </Box>
     )
 }
