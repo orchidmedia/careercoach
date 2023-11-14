@@ -19,7 +19,7 @@ const OptionDescription = ({ selected, type = '' }: any) => {
                     fontSize: '18px',
                     color: '#333',
                     marginBottom: '10px',
-                    marginTop:'20px'
+                    marginTop: '20px'
                 }}>{selected?.title}</Typography>
                 <Typography sx={{
                     marginBottom: '10px'

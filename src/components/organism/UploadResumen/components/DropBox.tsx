@@ -5,7 +5,7 @@ const initialState = {
     fileDocument: "",
 };
 
-const DropBox = ({setDocumentPDF}:any) => {
+const DropBox = ({ setDocumentPDF }: any) => {
     const [document, setDocument] = useState<any>(initialState);
 
     const handleOnChange = (value: any) => {
@@ -29,18 +29,29 @@ const DropBox = ({setDocumentPDF}:any) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {/* <Typography>Drag Here Your Resume</Typography>
-                <Typography>or</Typography> */}
                 <input
                     accept={".pdf"}
-                    style={{ display: "none" }}
+                    style={{
+                        height: '400px',
+                        width: '900px',
+                        opacity: 0,
+                    }}
                     id={"button-pdf"}
                     type={"file"}
                     onChange={(e) => handleDocumentFile(e)}
                 />
-                <label htmlFor={"button-pdf"}>
-                    <Typography sx={{ textDecoration: 'underline' }} >Choose File</Typography>
-                </label>
+                <Box sx={{
+                    position: 'absolute',
+                    textAlign: 'center'
+                }}>
+                    <Typography>Drag Here Your Resume</Typography>
+                    <Typography>or</Typography>
+                    <label style={{ cursor: "pointer" }} htmlFor={"button-pdf"}>
+                        <Typography sx={{ textDecoration: 'underline' }}>
+                            Choose File
+                        </Typography>
+                    </label>
+                </Box>
 
             </Box>
             <Box sx={{

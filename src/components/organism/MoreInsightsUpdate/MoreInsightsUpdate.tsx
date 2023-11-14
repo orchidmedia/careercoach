@@ -1,13 +1,14 @@
 import ButtonsCandidateFlow from '@/components/molecules/ButtonsCandidateFlow';
 import { Box } from '@mui/material';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import ImproveCard from './components/improveCard';
+import AlertError from '@/components/molecules/AlertError';
 
 const MoreInsightsUpdate = () => {
-    const router = useRouter();
 
     const [improves, setImproves]: any = useState();
+    const [open, setOpen] = useState(false);
+
 
     const handleSaveImproves = () => {
         const localData = localStorage.getItem('improves')
@@ -17,6 +18,14 @@ const MoreInsightsUpdate = () => {
     useEffect(() => {
         handleSaveImproves()
     }, []);
+
+    useEffect(() => {
+        if (!improves || improves.length === 0) {
+            setOpen(true)
+        } else {
+            setOpen(false)
+        }
+    }, [improves]);
 
     return (
         <Box m={5}>
@@ -31,12 +40,14 @@ const MoreInsightsUpdate = () => {
                 {
                     improves?.map((improve: any, index: number) => {
                         return (
-                           <ImproveCard key={index} improve={improve}/> 
+                            <ImproveCard key={index} improve={improve} />
                         )
                     })
                 }
             </Box>
             <ButtonsCandidateFlow textContinue={'GET JOBS'} />
+            <AlertError open={open} setOpen={setOpen} />
+
         </Box>
     )
 }

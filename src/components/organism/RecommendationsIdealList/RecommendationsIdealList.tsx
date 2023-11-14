@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ListOptions from '../../molecules/ListOptions/ListOptions'
 import Loader from '@/components/atoms/Loader'
+import AlertError from '@/components/molecules/AlertError'
 
 const RecommendationsIdealList = (data: any) => {
     const { isReady } = useRouter();
@@ -14,11 +15,17 @@ const RecommendationsIdealList = (data: any) => {
     const [careers, setCareers]: any = useState();
     const [selected, setSelected]: any = useState();
     const [loading, setloading] = useState(false);
+    const [open, setOpen] = useState(false);
+
 
 
     const handleSaveCareers = () => {
         const localData = localStorage.getItem('promptCareers')
-        setPromptCareers(localData)
+        if (localData) {
+            setPromptCareers(localData)
+        } else {
+            setOpen(true)
+        }
     }
 
 
@@ -41,7 +48,10 @@ const RecommendationsIdealList = (data: any) => {
                 const data = JSON.parse(result)
                 setCareers(data)
                 setSelected(data[0])
-            }).catch(error => console.log('error', error));
+            }).catch(error => {
+                setOpen(true);
+                console.error("Error 2:", error)
+            });
     }
 
     useEffect(() => {
@@ -74,6 +84,7 @@ const RecommendationsIdealList = (data: any) => {
             </Box>
             <ButtonsRecommendations textContinue={'View Job Opportunities'} />
             <Loader open={loading} />
+            <AlertError open={open} setOpen={setOpen} />
         </Box>
     )
 }
