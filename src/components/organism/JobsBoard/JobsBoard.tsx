@@ -82,7 +82,7 @@ export const JobsBoard = () => {
                 />
                 <OptionDescription type={'job'} selected={selected} />
             </Box>
-            <ButtonsRecommendations routerLink={careers?.search_metadata?.google_jobs_url} textContinue={'APPLY JOB'} />
+            <ButtonsRecommendations routerLink={careers?.search_metadata?.google_jobs_url} textContinue={'APPLY FOR THIS JOB'} />
             <Loader open={loading} />
             <AlertError open={open} setOpen={setOpen} />
         </Box>
